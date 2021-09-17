@@ -1,8 +1,11 @@
 {
   "name": "ultirequiem",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "start": "node index"
+  },
   "dependencies": {
     "boxen": "^5.1.2",
     "chalk": "^4.1.2",
