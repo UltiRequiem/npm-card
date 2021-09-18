@@ -15,6 +15,8 @@ This repository tries to help you make one easily.
 
 4. Create a new [npmjs token](https://docs.npmjs.com/creating-and-viewing-access-tokens#creating-tokens-with-the-cli) and add it to the secrets of your fork as `NPM_TOKEN `
 
+You can get a token in your shell by running `npm token create`
+
 5. Make a new Release
 
 Done!
