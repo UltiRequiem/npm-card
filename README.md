@@ -11,9 +11,11 @@ This repository tries to help you make one easily.
 
 2. Edit [config.js](./config.js) to fit you
 
-3. Change the [package name](https://github.com/UltiRequiem/npm-card/blob/main/package.json#L2) with you name
+3. Change the [package name](https://github.com/UltiRequiem/npm-card/blob/main/package.json#L2) with your name
 
-4. Make a new Release
+4. Create a new [npmjs token](https://docs.npmjs.com/creating-and-viewing-access-tokens#creating-tokens-with-the-cli) and add it to the secrets of your fork as `NPM_TOKEN `
+
+5. Make a new Release
 
 Done!
 
