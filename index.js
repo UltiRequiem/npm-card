@@ -1,66 +1,93 @@
 #!/usr/bin/env node
 
-const boxen = require('boxen')
-const inquirer = require('inquirer')
-const open = require('open')
+import boxen from "boxen";
+import inquirer from "inquirer";
+const {createPromptModule} = inquirer
+import open from "open";
 
-const data = require('./config')
+import config from "./config.js";
 
-const nextLine = '\n'
+const {
+  name,
+  handle,
+  labelWork,
+  work,
+  labelBlog,
+  blog,
+  labelTwitter,
+  twitter,
+  labelnpm,
+  npm,
+  labelGitHub,
+  github,
+  labelLinkedIn,
+  linkedin,
+  labelWeb,
+  web,
+  firstPharse,
+  secondPharse,
+  boxMargin,
+  boxFloat,
+  boxPagging,
+  borderStyle,
+  borderColor,
+  email,
+  farewell,
+} = config
+
+const nextLine = "\n";
 
 // Clean The Screen
-process.stdout.write('\x1b[2J')
+process.stdout.write("\x1b[2J");
 
 console.log(
   boxen(
     [
-      `${data.name} / ${data.handle}`,
+      `${name} / ${handle}`,
       nextLine,
-      data.labelWork ? `${data.labelWork}  ${data.work}` : null,
-      data.labelBlog ? `${data.labelBlog}  ${data.blog}` : null,
-      data.labelTwitter ? `${data.labelTwitter}  ${data.twitter}` : null,
-      data.labelnpm ? `${data.labelnpm}  ${data.npm}` : null,
-      data.labelGitHub ? `${data.labelGitHub}  ${data.github}` : null,
-      data.labelLinkedIn ? `${data.labelLinkedIn}  ${data.linkedin}` : null,
-      data.labelWeb ? `${data.labelWeb}  ${data.web}` : null,
+      labelWork ? `${labelWork}  ${work}` : null,
+      labelBlog ? `${labelBlog}  ${blog}` : null,
+      labelTwitter ? `${labelTwitter}  ${twitter}` : null,
+      labelnpm ? `${labelnpm}  ${npm}` : null,
+      labelGitHub ? `${labelGitHub}  ${github}` : null,
+      labelLinkedIn ? `${labelLinkedIn}  ${linkedin}` : null,
+      labelWeb ? `${labelWeb}  ${web}` : null,
       nextLine,
-      data.firstPharse ? data.firstPharse : null,
-      data.secondPharse ? data.secondPharse : null
+      firstPharse ? firstPharse : null,
+      secondPharse ? secondPharse : null,
     ]
       .filter((value) => value != null)
-      .join('\n'),
+      .join("\n"),
 
     {
-      margin: data.boxMargin || 1,
-      float: data.boxFloat || 'center',
-      padding: data.boxPagging || 1,
-      borderStyle: data.borderStyle || 'single',
-      borderColor: data.borderColor || 'green'
+      margin: boxMargin || 1,
+      float: boxFloat || "center",
+      padding: boxPagging || 1,
+      borderStyle: borderStyle || "single",
+      borderColor: borderColor || "green",
     }
   )
-)
+);
 
-inquirer
-  .createPromptModule()([
-    {
-      type: 'list',
-      name: 'action',
-      message: 'What do you want to do?',
-      choices: [
-        {
-          name: 'Send me an email?',
-          value: () => {
-            open(`mailto:${data.email}`)
-            console.log(data.farewell)
-          }
+createPromptModule()([
+  {
+    type: "list",
+    name: "action",
+    message: "What do you want to do?",
+    choices: [
+      {
+        name: "Send me an email?",
+        value: () => {
+          open(`mailto:${email}`);
+          console.log(farewell);
         },
-        {
-          name: 'Exit',
-          value: () => {
-            console.log(data.farewell)
-          }
-        }
-      ]
-    }
-  ])
-  .then((answer) => answer.action())
+      },
+      {
+        name: "Exit",
+        value: () => {
+          console.log(farewell);
+        },
+      },
+    ],
+  },
+]).then((answer) => answer.action());
