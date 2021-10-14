@@ -1,11 +1,12 @@
 #!/usr/bin/env node
 
-import boxen from "boxen";
-import inquirer from "inquirer";
-const {createPromptModule} = inquirer
-import open from "open";
+import boxen from 'boxen';
+import inquirer from 'inquirer';
+import open from 'open';
 
-import config from "./config.js";
+import config from './config';
+
+const { createPromptModule } = inquirer;
 
 const {
   name,
@@ -33,12 +34,12 @@ const {
   borderColor,
   email,
   farewell,
-} = config
+} = config;
 
-const nextLine = "\n";
+const nextLine = '\n';
 
 // Clean The Screen
-process.stdout.write("\x1b[2J");
+process.stdout.write('\x1b[2J');
 
 console.log(
   boxen(
@@ -53,37 +54,37 @@ console.log(
       labelLinkedIn ? `${labelLinkedIn}  ${linkedin}` : null,
       labelWeb ? `${labelWeb}  ${web}` : null,
       nextLine,
-      firstPharse ? firstPharse : null,
-      secondPharse ? secondPharse : null,
+      firstPharse || null,
+      secondPharse || null,
     ]
       .filter((value) => value != null)
-      .join("\n"),
+      .join('\n'),
 
     {
       margin: boxMargin || 1,
-      float: boxFloat || "center",
+      float: boxFloat || 'center',
       padding: boxPagging || 1,
-      borderStyle: borderStyle || "single",
-      borderColor: borderColor || "green",
+      borderStyle: borderStyle || 'single',
+      borderColor: borderColor || 'green',
     }
   )
 );
 
 createPromptModule()([
   {
-    type: "list",
-    name: "action",
-    message: "What do you want to do?",
+    type: 'list',
+    name: 'action',
+    message: 'What do you want to do?',
     choices: [
       {
-        name: "Send me an email?",
+        name: 'Send me an email?',
         value: () => {
           open(`mailto:${email}`);
           console.log(farewell);
         },
       },
       {
-        name: "Exit",
+        name: 'Exit',
         value: () => {
           console.log(farewell);
         },
